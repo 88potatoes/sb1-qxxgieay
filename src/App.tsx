@@ -159,28 +159,6 @@ function App() {
   const [examInput, setExamInput] = useState('');
   const [examResults, setExamResults] = useState<string | null>(null);
 
-  // const handleSendMessage = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   if (inputMessage.trim()) {
-  //     // Add user's message
-  //     const newMessages = [
-  //       ...chatMessages,
-  //       { text: inputMessage, sender: 'user' },
-  //     ];
-
-  //     // Get patient's response using the enhanced persona system
-  //     const patientResponse = patientPersona.getResponse(inputMessage);
-  //     setChatMessages(newMessages);
-  //     setInputMessage('');
-  //     await delay(100);
-
-  //     // Add patient's response
-  //     newMessages.push({ text: patientResponse, sender: 'patient' });
-
-  //     setChatMessages(newMessages);
-  //   }
-  // };
-
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (inputMessage.trim()) {
