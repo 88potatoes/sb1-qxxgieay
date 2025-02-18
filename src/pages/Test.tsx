@@ -37,12 +37,11 @@ export default function Home() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-4 py-6">
-
+      <div className="max-w-6xl mx-auto px-4 py-6 h-[calc(100vh-52px)]">
         {/* Three Column Layout */}
-        <div className="flex gap-6">
+        <div className="flex gap-6 h-full">
           {/* Left Column - 1/4 width */}
-          <div className="w-1/4 space-y-4">
+          <div className="w-1/4 space-y-4 flex flex-col">
             <div className="w-full">
               {/* Vitals Monitor */}
               <div className="w-full bg-black text-green-400 p-3 rounded-lg">
@@ -58,43 +57,54 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
-              Meds
-            </button>
-            <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
-              IV
-            </button>
-            <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
-              O₂
-            </button>
-            <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
-              MET
-            </button>
-            <div className="flex gap-2">
-              <button className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg">
-                Disc
+            <div className="flex flex-col w-full flex-1 gap-4 justify-end">
+              <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
+                Meds
               </button>
-              <button className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg">
-                Refer
+              <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
+                IV
               </button>
+              <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
+                O₂
+              </button>
+              <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
+                MET
+              </button>
+              <div className="flex gap-2">
+                <button className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg">
+                  Disc
+                </button>
+                <button className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg">
+                  Refer
+                </button>
+              </div>
             </div>
           </div>
 
           {/* Middle Column - 1/2 width */}
-          <div className="w-1/2">
-            <div className="bg-gray-50 rounded-3xl p-4 mb-4">
-              <div className="flex items-center gap-2">
-                <span>How bad is the pain?</span>
-                <div className="w-6 h-4 bg-gray-300 rounded"></div>
-              </div>
+          <div className="w-1/2 flex flex-col">
+            <div className="w-full flex-1">
+              <img
+                src="https://img.freepik.com/free-photo/3d-cartoon-hospital-healthcare-scene_23-2151644147.jpg"
+                className="w-full h-full rounded-md"
+              />
             </div>
-            <div className="bg-gray-50 rounded-3xl p-4">
-              <p>"I feel the pain in my chest and"</p>
+            <div className="h-1/2 flex flex-col w-full">
+              <div className="py-4">
+                <input
+                  type="text"
+                  className="bg-gray-200 rounded-3xl p-4 w-full"
+                  placeholder="Talk to patient"
+                />
+              </div>
+              <div className="bg-gray-200 rounded-3xl p-4 flex-1">
+                <p>"I feel the pain in my chest and"</p>
+              </div>
             </div>
           </div>
 
           {/* Right Column - 1/4 width */}
-          <div className="w-1/4 space-y-4">
+          <div className="w-1/4 space-y-4 flex flex-col gap-6">
             <div>
               {/* Patient Info */}
               <div className="flex items-start gap-4">
@@ -114,7 +124,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 justify-end flex-1">
               <button className="w-full bg-gray-800 text-white py-3 px-4 rounded-lg text-left">
                 Physical Exam
               </button>
