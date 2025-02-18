@@ -4,7 +4,7 @@ import Test from "./pages/Test";
 import Results from "./pages/Results";
 import Selection from "./pages/Selection";
 
-export function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>
