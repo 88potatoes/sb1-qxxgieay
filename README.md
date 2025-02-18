@@ -1,4 +1,4 @@
-# Project Overview: TASPA
+# Project Overview: LUCAS
 
 This project aims to revolutionize how Emergency Department (ED) doctors are trained to admit patients to specialists by leveraging AI-powered synthetic patients and real-time decision assessment. The system uses an 11GB dataset of de-identified Electronic Medical Records (EMR) to create realistic patient scenarios, evaluate trainee performance, and provide actionable feedback.
 
