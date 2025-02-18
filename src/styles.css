@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lexend Deca', sans-serif;
+}
+
+.gradient-background {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #44054f, #a15b96);
+  background-size: 400% 400%;
+  animation: gradient 30s ease infinite;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-bar {
+  background-color: rgba(34, 11, 78, 0.5); /* Match button background color */
+  color: white;
+}
+
+.top-bar .icon,
+.top-bar .text {
+  color: white;
+}
+
+.top-bar .search-input {
+  background-color: rgba(111, 67, 67, 0.226); /* Slightly transparent background */
+  color: rgb(63, 52, 52);
+}
+
+.top-bar .search-input::placeholder {
+  color: rgba(255, 255, 255, 0.7); /* Slightly transparent placeholder */
+}
+
+.top-bar .lucas-logo {
+  color: #1D4ED8; /* Keep the LUCAS logo color unchanged */
+}
+
+.slogan-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.slogan-container h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: white;
+  margin: 0;
+  font-family: 'Lexend Deca', sans-serif;
+}
+
+.slogan-container h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: white;
+  margin: 0;
+  font-family: 'Lexend Deca', sans-serif;
+}
+
+.content-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Adjust the gap between buttons */
+}
+
+a {
+  font-family: 'Lexend Deca', sans-serif;
+  background-color: rgba(63, 52, 52, 0.5); /* Set background color with opacity */
+  color: white;
+  opacity: 0.9;
+  padding: 15px 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 200px; /* Set a fixed width for all buttons */
+  text-decoration: none;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

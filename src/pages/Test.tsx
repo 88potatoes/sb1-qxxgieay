@@ -10,6 +10,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { User } from "lucide-react";
+import ModelViewer from "@/components/ModelViewer";
 import { useRef, useState } from "react";
 
 const physicalExamActions = [
@@ -304,10 +305,7 @@ export default function Home() {
           {/* Middle Column - 1/2 width */}
           <div className="w-1/2 flex flex-col">
             <div className="w-full flex-1">
-              <img
-                src="https://img.freepik.com/free-photo/3d-cartoon-hospital-healthcare-scene_23-2151644147.jpg"
-                className="w-full h-full rounded-md object-contain"
-              />
+              <ModelViewer /> {/* Replace the image with the 3D model */}
             </div>
             <div className="h-1/2 flex flex-col w-full">
               <div className="py-4">
