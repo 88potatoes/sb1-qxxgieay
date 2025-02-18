@@ -68,15 +68,44 @@ export default function Home() {
             <div className="w-full">
               {/* Vitals Monitor */}
               <div className="w-full bg-black text-green-400 p-3 rounded-lg">
-                <div className="border-b border-green-400 pb-2 mb-2">
-                  <div className="h-8 bg-green-400/20 rounded mb-1"></div>
+                {/* BPM */}
+                <div className="border-b border-green-400 pb-2 mb-2 flex gap-2">
+                  <div className="h-8 bg-green-400/20 rounded mb-1 basis-2/3"></div>
+                  <div className="h-8 bg-green-400/20 rounded mb-1 basis-1/3 px-1">
+                    <div className="text-2xl font-bold text-center">
+                      60
+                      <span className="text-sm text-white font-normal">
+                        bpm
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div className="border-b border-green-400 pb-2 mb-2">
-                  <div className="h-8 bg-green-400/20 rounded mb-1"></div>
+
+                {/* PR BPM */}
+                <div className="border-b border-green-400 pb-2 mb-2 flex gap-2">
+                  <div className="h-8 bg-green-400/20 rounded mb-1 basis-2/3"></div>
+                  <div className="h-8 bg-green-400/20 rounded mb-1 basis-1/3 px-1">
+                    <div className="text-2xl font-bold text-center text-white flex">
+                      <div>98</div>
+                      <div className="flex flex-col text-xs font-normal py-1 gap-0 justify-center items-center">
+                        <div>89</div>
+                        <div>%</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex justify-between items-center">
-                  <div className="text-2xl font-bold">60</div>{" "}
-                  <div className="text-2xl font-bold">30</div>
+
+                {/* RPM */}
+                <div className="flex gap-2">
+                  <div className="h-8 bg-green-400/20 rounded mb-1 basis-2/3"></div>
+                  <div className="h-8 bg-green-400/20 rounded mb-1 basis-1/3 px-1">
+                    <div className="text-2xl font-bold text-center text-white flex">
+                      <div className="pr-1">30</div>
+                      <div className="flex flex-col text-xs font-normal py-1 gap-0 justify-center items-center">
+                        rpm
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
