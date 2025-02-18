@@ -1,40 +1,39 @@
-import { Search, Bell, Settings, User } from "lucide-react";
+import TopBar from "@/components/TopBar";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogDescription,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { ActivityIcon, User } from "lucide-react";
+
+const physicalExamActions = [
+  "Capillary Blood Glucose (BGL)",
+  "Arterial Blood Gas (ABG)",
+  "Venous Blood Gas (VBG)",
+  "Urinalysis (Dipstick)",
+  "Ketones (/Urine)",
+  "Pregnancy Test (Urine hCG)",
+  "ECG (12-Lead)",
+  "Peak Expiratory Flow Rate (PEFR) - Asthma Assessment",
+  "Spirometry (Basic Lung Function)",
+  "Orthostatic Blood Pressure (Postural Drop Test)",
+  "Bladder Scan (Urinary Retention Assessment)",
+  "Capillary Refill Time",
+  "Skin Turgor Assessment (Dehydration Check)",
+  "Bedside Coagulation Test (INR/Clotting Time)",
+  "Nasal/Throat Swab (POCT for Infection - Strep, Flu, COVID, RSV)",
+  "Cuff Leak Test (Pre-Extubation Readiness)",
+  "Ankle-Brachial Index (ABI) - Peripheral Artery Disease",
+];
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Top Navigation Bar */}
-      <div className="w-full bg-white shadow-sm">
-        <div className="max-w-6xl mx-auto px-4 py-2">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-8">
-              <h1 className="text-xl font-bold text-blue-600">MedDash</h1>
-              <div className="flex items-center gap-2 bg-gray-100 px-3 py-1 rounded-lg">
-                <Search className="w-4 h-4 text-gray-500" />
-                <input
-                  type="text"
-                  placeholder="Search patients..."
-                  className="bg-transparent outline-none text-sm w-48"
-                />
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-full">
-                <Bell className="w-5 h-5" />
-              </button>
-              <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-full">
-                <Settings className="w-5 h-5" />
-              </button>
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                  <span className="text-sm font-medium text-blue-600">DR</span>
-                </div>
-                <span className="text-sm font-medium">Dr. Roberts</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <TopBar />
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 py-6 h-[calc(100vh-52px)]">
@@ -58,7 +57,74 @@ export default function Home() {
               </div>
             </div>
             <div className="flex flex-col w-full flex-1 gap-4 justify-end">
-              <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
+              <div>
+                <p className="text-lg font-semibold">Orders</p>
+              </div>
+
+              {/* Meds */}
+              <Dialog>
+                <DialogTrigger>
+                  <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
+                    Meds
+                  </button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle className="text-">Meds</DialogTitle>
+                    <DialogDescription>Medication</DialogDescription>
+                  </DialogHeader>
+                  Some content
+                </DialogContent>
+              </Dialog>
+              {/* IV */}
+              <Dialog>
+                <DialogTrigger>
+                  <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
+                  IV
+                  </button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle className="text-">IV</DialogTitle>
+                    <DialogDescription>Medication</DialogDescription>
+                  </DialogHeader>
+                  Some content
+                </DialogContent>
+              </Dialog>
+
+              {/* MET */}
+              <Dialog>
+                <DialogTrigger>
+                  <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
+                  MET
+                  </button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle className="text-">MET</DialogTitle>
+                    <DialogDescription>Medication</DialogDescription>
+                  </DialogHeader>
+                  Some content
+                </DialogContent>
+              </Dialog>
+
+              {/* O₂ */}
+              <Dialog>
+                <DialogTrigger>
+                  <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
+                  O₂
+                  </button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle className="text-">O₂</DialogTitle>
+                    <DialogDescription>Medication</DialogDescription>
+                  </DialogHeader>
+                  Some content
+                </DialogContent>
+              </Dialog>
+
+              {/* <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
                 Meds
               </button>
               <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
@@ -69,7 +135,7 @@ export default function Home() {
               </button>
               <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
                 MET
-              </button>
+              </button> */}
               <div className="flex gap-2">
                 <button className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg">
                   Disc
@@ -78,6 +144,7 @@ export default function Home() {
                   Refer
                 </button>
               </div>
+
             </div>
           </div>
 
@@ -86,7 +153,7 @@ export default function Home() {
             <div className="w-full flex-1">
               <img
                 src="https://img.freepik.com/free-photo/3d-cartoon-hospital-healthcare-scene_23-2151644147.jpg"
-                className="w-full h-full rounded-md"
+                className="w-full h-full rounded-md object-contain"
               />
             </div>
             <div className="h-1/2 flex flex-col w-full">
@@ -125,18 +192,121 @@ export default function Home() {
               </div>
             </div>
             <div className="flex flex-col gap-4 justify-end flex-1">
-              <button className="w-full bg-gray-800 text-white py-3 px-4 rounded-lg text-left">
-                Physical Exam
-              </button>
-              <button className="w-full bg-gray-800 text-white py-3 px-4 rounded-lg text-left">
-                Bedside
-              </button>
-              <button className="w-full bg-gray-800 text-white py-3 px-4 rounded-lg text-left">
-                Labs
-              </button>
-              <button className="w-full bg-gray-800 text-white py-3 px-4 rounded-lg text-left">
-                Imagery
-              </button>
+              {/* Physical Exam */}
+              <Dialog>
+                <DialogTrigger>
+                  <button className="w-full bg-gray-800 text-white py-3 px-4 rounded-lg text-left">
+                    Physical Exam
+                  </button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle className="text-">Physical Exam</DialogTitle>
+                    <DialogDescription>
+                      Find the action you would like to take
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="flex flex-col gap-2 max-h-96 overflow-y-auto">
+                    {physicalExamActions.map((action_string, index) => {
+                      return (
+                        <button
+                          key={index}
+                          className="rounded-md bg-gray-100 hover:bg-gray-200 p-2 text-start"
+                        >
+                          {action_string}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </DialogContent>
+              </Dialog>
+
+              {/* Imagery */}
+              <Dialog>
+                <DialogTrigger>
+                  <button className="w-full bg-gray-800 text-white py-3 px-4 rounded-lg text-left">
+                    Imagery
+                  </button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle className="text-">Imagery</DialogTitle>
+                    <DialogDescription>
+                      Find the action you would like to take
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="flex flex-col gap-2 max-h-96 overflow-y-auto">
+                    {physicalExamActions.map((action_string, index) => {
+                      return (
+                        <button
+                          key={index}
+                          className="rounded-md bg-gray-100 hover:bg-gray-200 p-2 text-start"
+                        >
+                          {action_string}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </DialogContent>
+              </Dialog>
+
+              {/* Bedside */}
+              <Dialog>
+                <DialogTrigger>
+                  <button className="w-full bg-gray-800 text-white py-3 px-4 rounded-lg text-left">
+                    Bedside
+                  </button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle className="text-">Bedside</DialogTitle>
+                    <DialogDescription>
+                      Find the action you would like to take
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="flex flex-col gap-2 max-h-96 overflow-y-auto">
+                    {physicalExamActions.map((action_string, index) => {
+                      return (
+                        <button
+                          key={index}
+                          className="rounded-md bg-gray-100 hover:bg-gray-200 p-2 text-start"
+                        >
+                          {action_string}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </DialogContent>
+              </Dialog>
+
+              {/* Labs */}
+              <Dialog>
+                <DialogTrigger>
+                  <button className="w-full bg-gray-800 text-white py-3 px-4 rounded-lg text-left">
+                    Labs
+                  </button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle className="text-">Labs</DialogTitle>
+                    <DialogDescription>
+                      Find the action you would like to take
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="flex flex-col gap-2 max-h-96 overflow-y-auto">
+                    {physicalExamActions.map((action_string, index) => {
+                      return (
+                        <button
+                          key={index}
+                          className="rounded-md bg-gray-100 hover:bg-gray-200 p-2 text-start"
+                        >
+                          {action_string}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </div>
