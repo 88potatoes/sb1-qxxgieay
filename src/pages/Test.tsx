@@ -7,7 +7,7 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { ActivityIcon, User } from "lucide-react";
+import { User } from "lucide-react";
 
 const physicalExamActions = [
   "Capillary Blood Glucose (BGL)",
