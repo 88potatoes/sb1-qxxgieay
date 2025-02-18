@@ -10,7 +10,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { User } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const physicalExamActions = [
   "Capillary Blood Glucose (BGL)",
@@ -51,11 +51,27 @@ const referralLocations = [
 
 type referralLocationsType = (typeof referralLocations)[number];
 
+const patientReponses = [
+  "The pain started about an hour ago, it's like a squeezing in my chest.",
+  "I feel dizzy whenever I stand up, especially in the morning.",
+  "My throat's been really sore for the past few days and I've had chills.",
+  "I've been having trouble catching my breath, especially when I lay down.",
+  "The headache won't go away, and bright lights make it worse.",
+  "My stomach has been hurting and I've thrown up twice today.",
+  "I noticed my ankles are really swollen, more on the right side.",
+  "The cough keeps me up at night, and sometimes I cough up yellow mucus.",
+  "My left arm feels numb and tingly, especially in my fingers.",
+  "I've been feeling really tired lately, more than usual, and my heart races sometimes.",
+];
+
 export default function Home() {
   const [selectedReferralLocation, setSelectedReferralLocation] =
     useState<null | referralLocationsType>(null);
 
   const [isTestCompleted, setIsTestCompleted] = useState(false);
+
+  const [patientResponse, setPatientResponse] = useState<string | 0 | 1>(0); // 0 is initial state, 1 means patient is currently 'thinking'
+  const inputFormRef = useRef(null);
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Top Navigation Bar */}
@@ -93,6 +109,7 @@ export default function Home() {
                         <div>89</div>
                         <div>%</div>
                       </div>
+                      <div className="text-xs font-normal">PR bpm</div>
                     </div>
                   </div>
                 </div>
@@ -248,7 +265,10 @@ export default function Home() {
                     </div>
                     {selectedReferralLocation !== null && (
                       <DialogFooter className="flex gap-2">
-                        <button className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg" onClick={() => setIsTestCompleted(true)}>
+                        <button
+                          className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg"
+                          onClick={() => setIsTestCompleted(true)}
+                        >
                           Confirm
                         </button>
                         <DialogClose asChild>
@@ -274,14 +294,37 @@ export default function Home() {
             </div>
             <div className="h-1/2 flex flex-col w-full">
               <div className="py-4">
-                <input
-                  type="text"
-                  className="bg-gray-200 rounded-3xl p-4 w-full"
-                  placeholder="Talk to patient"
-                />
+                <form
+                  ref={inputFormRef}
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+                    inputFormRef.current?.reset();
+                    setPatientResponse(1);
+                    await new Promise((resolve) =>
+                      setTimeout(() => resolve(null), 1000)
+                    );
+                    setPatientResponse(
+                      patientReponses[
+                        Math.floor(Math.random() * patientReponses.length)
+                      ]
+                    );
+                  }}
+                >
+                  <input
+                    type="text"
+                    className="bg-gray-200 rounded-3xl p-4 w-full"
+                    placeholder="Talk to patient"
+                  />
+                </form>
               </div>
               <div className="bg-gray-200 rounded-3xl p-4 flex-1">
-                <p>"I feel the pain in my chest and"</p>
+                <div>{patientResponse === 0 && "Hi Doctor"}</div>
+                <div>
+                  {patientResponse === 1 && <p className="text-gray-600">Patient is thinking...</p>}
+                </div>
+                <div>
+                  {typeof patientResponse !== "number" && patientResponse}
+                </div>
               </div>
             </div>
           </div>
@@ -505,7 +548,10 @@ export default function Home() {
             </div>
           </div>
           <DialogFooter>
-            <a href="/" className="bg-gray-800 text-white py-3 px-4 rounded-lg text-left">
+            <a
+              href="/"
+              className="bg-gray-800 text-white py-3 px-4 rounded-lg text-left"
+            >
               Return to Dashboard
             </a>
           </DialogFooter>
