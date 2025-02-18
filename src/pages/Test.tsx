@@ -1,4 +1,4 @@
-import TopBar from "@/components/TopBar";
+import TestTopBar from "@/components/TestTopBar";
 import {
   Dialog,
   DialogTrigger,
@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Top Navigation Bar */}
-      <TopBar />
+      <TestTopBar />
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 py-6 h-[calc(100vh-52px)]">
