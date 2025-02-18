@@ -54,6 +54,8 @@ type referralLocationsType = (typeof referralLocations)[number];
 export default function Home() {
   const [selectedReferralLocation, setSelectedReferralLocation] =
     useState<null | referralLocationsType>(null);
+
+  const [isTestCompleted, setIsTestCompleted] = useState(false);
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Top Navigation Bar */}
@@ -191,13 +193,19 @@ export default function Home() {
                       <DialogDescription>Confirm Discharge</DialogDescription>
                     </DialogHeader>
                     <div className="flex gap-2 max-h-96 overflow-y-auto">
-                      <button className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg">
-                        Discharge
-                      </button>
-                      <DialogClose></DialogClose>
-                      <button className="flex-1 bg-gray-800 text-white py-2 px-4 rounded-lg">
-                        Don't discharge
-                      </button>
+                      <DialogClose asChild>
+                        <button
+                          className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg"
+                          onClick={() => setIsTestCompleted(true)}
+                        >
+                          Discharge
+                        </button>
+                      </DialogClose>
+                      <DialogClose asChild>
+                        <button className="flex-1 bg-gray-800 text-white py-2 px-4 rounded-lg">
+                          Don't discharge
+                        </button>
+                      </DialogClose>
                     </div>
                   </DialogContent>
                 </Dialog>
@@ -419,6 +427,90 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* Test Completion Dialog */}
+      <Dialog open={isTestCompleted}>
+        <DialogContent className="[&>button]:hidden w-full max-w-[80vw]">
+          <DialogHeader>
+            <DialogTitle>
+              Results for <span className="font-bold">Patient LUCAS</span>
+            </DialogTitle>
+            <DialogDescription>Review your results</DialogDescription>
+          </DialogHeader>
+          <div className="flex flex-col gap-4">
+            {/* Clarity & Structure (SBAR Format) */}
+            <div className="grid grid-cols-[1fr_80px_2fr] gap-4 items-start">
+              <div className="font-medium text-gray-700">
+                Clarity & Structure (SBAR Format)
+              </div>
+              <div className="px-2 py-1 bg-green-100 text-green-700 rounded text-sm font-medium text-center">
+                GOOD
+              </div>
+              <div className="text-gray-600 text-sm">
+                Clear structure but could improve conciseness. Age, symptoms,
+                and risk factors are well communicated.
+              </div>
+            </div>
+
+            {/* Patient Details */}
+            <div className="grid grid-cols-[1fr_80px_2fr] gap-4 items-start">
+              <div className="font-medium text-gray-700">Patient Details</div>
+              <div className="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-sm font-medium text-center">
+                FAIR
+              </div>
+              <div className="text-gray-600 text-sm">
+                Mentioned STEMI but didn’t explicitly request immediate PCI
+                activation.
+              </div>
+            </div>
+
+            {/* Urgency & Prioritization */}
+            <div className="grid grid-cols-[1fr_80px_2fr] gap-4 items-start">
+              <div className="font-medium text-gray-700">
+                Urgency & Prioritization
+              </div>
+              <div className="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-sm font-medium text-center">
+                FAIR
+              </div>
+              <div className="text-gray-600 text-sm">
+                Correctly identified STEMI (II, III, aVF) with reciprocal
+                changes.
+              </div>
+            </div>
+
+            {/* ECG Interpretation */}
+            <div className="grid grid-cols-[1fr_80px_2fr] gap-4 items-start">
+              <div className="font-medium text-gray-700">
+                ECG Interpretation
+              </div>
+              <div className="px-2 py-1 bg-red-100 text-red-700 rounded text-sm font-medium text-center">
+                WEAK
+              </div>
+              <div className="text-gray-600 text-sm">
+                Included aspirin, ticagrelor, and GTN but forgot to mention
+                oxygen, fluids, or heparin.
+              </div>
+            </div>
+
+            {/* Handover Request */}
+            <div className="grid grid-cols-[1fr_80px_2fr] gap-4 items-start">
+              <div className="font-medium text-gray-700">Handover Request</div>
+              <div className="px-2 py-1 bg-red-100 text-red-700 rounded text-sm font-medium text-center">
+                WEAK
+              </div>
+              <div className="text-gray-600 text-sm">
+                Did not confirm if cardiology wants additional management before
+                transfer.
+              </div>
+            </div>
+          </div>
+          <DialogFooter>
+            <a href="/" className="bg-gray-800 text-white py-3 px-4 rounded-lg text-left">
+              Return to Dashboard
+            </a>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
