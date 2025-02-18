@@ -6,8 +6,11 @@ import {
   DialogHeader,
   DialogDescription,
   DialogTitle,
+  DialogClose,
+  DialogFooter,
 } from "@/components/ui/dialog";
 import { User } from "lucide-react";
+import { useState } from "react";
 
 const physicalExamActions = [
   "Capillary Blood Glucose (BGL)",
@@ -29,7 +32,28 @@ const physicalExamActions = [
   "Ankle-Brachial Index (ABI) - Peripheral Artery Disease",
 ];
 
+const referralLocations = [
+  "General Medicine",
+  "Infectious Diseases",
+  "Endocrinology",
+  "Nephrology",
+  "Rheumatology",
+  "Hematology",
+  "Oncology",
+  "Geriatrics",
+  "Immunology & Allergy",
+  "Palliative Care",
+  "Cardiology",
+  "Cardiothoracic Surgery",
+  "Respiratory Medicine",
+  "Sleep Medicine",
+] as const;
+
+type referralLocationsType = (typeof referralLocations)[number];
+
 export default function Home() {
+  const [selectedReferralLocation, setSelectedReferralLocation] =
+    useState<null | referralLocationsType>(null);
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Top Navigation Bar */}
@@ -80,7 +104,7 @@ export default function Home() {
               <Dialog>
                 <DialogTrigger>
                   <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
-                  IV
+                    IV
                   </button>
                 </DialogTrigger>
                 <DialogContent>
@@ -96,7 +120,7 @@ export default function Home() {
               <Dialog>
                 <DialogTrigger>
                   <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
-                  MET
+                    MET
                   </button>
                 </DialogTrigger>
                 <DialogContent>
@@ -112,7 +136,7 @@ export default function Home() {
               <Dialog>
                 <DialogTrigger>
                   <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
-                  O₂
+                    O₂
                   </button>
                 </DialogTrigger>
                 <DialogContent>
@@ -124,27 +148,82 @@ export default function Home() {
                 </DialogContent>
               </Dialog>
 
-              {/* <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
-                Meds
-              </button>
-              <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
-                IV
-              </button>
-              <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
-                O₂
-              </button>
-              <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
-                MET
-              </button> */}
               <div className="flex gap-2">
-                <button className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg">
-                  Disc
-                </button>
-                <button className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg">
-                  Refer
-                </button>
-              </div>
+                {/* Discharge */}
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <button className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg">
+                      Discharge
+                    </button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle className="text-">Discharge</DialogTitle>
+                      <DialogDescription>Confirm Discharge</DialogDescription>
+                    </DialogHeader>
+                    <div className="flex gap-2 max-h-96 overflow-y-auto">
+                      <button className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg">
+                        Discharge
+                      </button>
+                      <DialogClose></DialogClose>
+                      <button className="flex-1 bg-gray-800 text-white py-2 px-4 rounded-lg">
+                        Don't discharge
+                      </button>
+                    </div>
+                  </DialogContent>
+                </Dialog>
 
+                {/* Refer */}
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <button
+                      className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg"
+                      onClick={() => setSelectedReferralLocation(null)}
+                    >
+                      Refer
+                    </button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle className="text-">Refer</DialogTitle>
+                      <DialogDescription>
+                        Select referral location
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="flex flex-col gap-2 max-h-96 overflow-y-auto">
+                      {referralLocations.map((referral_string, index) => {
+                        return (
+                          <button
+                            key={index}
+                            className={`rounded-md ${
+                              referral_string !== selectedReferralLocation
+                                ? "bg-gray-100 hover:bg-gray-200"
+                                : "bg-gray-300 hover:bg-gray-400"
+                            } p-2 text-start`}
+                            onClick={() =>
+                              setSelectedReferralLocation(referral_string)
+                            }
+                          >
+                            {referral_string}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    {selectedReferralLocation !== null && (
+                      <DialogFooter className="flex gap-2">
+                        <button className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg">
+                          Confirm
+                        </button>
+                        <DialogClose asChild>
+                          <button className="flex-1 bg-gray-800 text-white py-2 px-4 rounded-lg">
+                            Cancel
+                          </button>
+                        </DialogClose>
+                      </DialogFooter>
+                    )}
+                  </DialogContent>
+                </Dialog>
+              </div>
             </div>
           </div>
 
@@ -240,7 +319,7 @@ export default function Home() {
                       return (
                         <button
                           key={index}
-                          className="rounded-md bg-gray-100 hover:bg-gray-200 p-2 text-start"
+                          className={`rounded-md bg-gray-100 hover:bg-gray-200 p-2 text-start`}
                         >
                           {action_string}
                         </button>
