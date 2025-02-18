@@ -248,7 +248,7 @@ export default function Home() {
                     </div>
                     {selectedReferralLocation !== null && (
                       <DialogFooter className="flex gap-2">
-                        <button className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg">
+                        <button className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg" onClick={() => setIsTestCompleted(true)}>
                           Confirm
                         </button>
                         <DialogClose asChild>
