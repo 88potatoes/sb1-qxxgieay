@@ -30,7 +30,9 @@ const physicalExamActions = [
   "Nasal/Throat Swab (POCT for Infection - Strep, Flu, COVID, RSV)",
   "Cuff Leak Test (Pre-Extubation Readiness)",
   "Ankle-Brachial Index (ABI) - Peripheral Artery Disease",
-];
+] as const;
+
+type physicalExamActionsType = (typeof physicalExamActions)[number];
 
 const referralLocations = [
   "General Medicine",
@@ -64,14 +66,33 @@ const patientReponses = [
   "I've been feeling really tired lately, more than usual, and my heart races sometimes.",
 ];
 
+type RequestedResource = {
+  resource_name: string;
+  resource_image: string;
+};
+
+const randomImageLinks = [
+  "https://www.researchgate.net/publication/306226599/figure/fig3/AS:395911227297794@1471404000825/Random-sample-of-medical-images-from-datasets-MMM-and-DX-rows-1-and-2-show-X-ray-images.png",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhR_jFy4aEMXr6oYivkLZCUr0USdBCeLT0uQ&s",
+  "https://ars.els-cdn.com/content/image/1-s2.0-S1361841515000912-fx1.jpg",
+  "https://ai2-s2-public.s3.amazonaws.com/figures/2017-08-08/f127e67ec7334d19ec56478c99d2bb3d182ab286/11-Figure5-1.png",
+  "https://www.statcan.gc.ca/sites/default/files/images/data-science-image-segmentation-figure-1-english.png",
+];
+
 export default function Home() {
   const [selectedReferralLocation, setSelectedReferralLocation] =
     useState<null | referralLocationsType>(null);
+  const [selectedResource, setSelectedResource] =
+    useState<null | physicalExamActionsType>(null);
 
   const [isTestCompleted, setIsTestCompleted] = useState(false);
 
   const [patientResponse, setPatientResponse] = useState<string | 0 | 1>(0); // 0 is initial state, 1 means patient is currently 'thinking'
   const inputFormRef = useRef(null);
+
+  const [requestedResources, setRequestedResources] = useState<
+    RequestedResource[]
+  >([]);
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Top Navigation Bar */}
@@ -129,10 +150,6 @@ export default function Home() {
               </div>
             </div>
             <div className="flex flex-col w-full flex-1 gap-4 justify-end">
-              <div>
-                <p className="text-lg font-semibold">Orders</p>
-              </div>
-
               {/* Meds */}
               <Dialog>
                 <DialogTrigger>
@@ -320,7 +337,9 @@ export default function Home() {
               <div className="bg-gray-200 rounded-3xl p-4 flex-1">
                 <div>{patientResponse === 0 && "Hi Doctor"}</div>
                 <div>
-                  {patientResponse === 1 && <p className="text-gray-600">Patient is thinking...</p>}
+                  {patientResponse === 1 && (
+                    <p className="text-gray-600">Patient is thinking...</p>
+                  )}
                 </div>
                 <div>
                   {typeof patientResponse !== "number" && patientResponse}
@@ -334,14 +353,12 @@ export default function Home() {
             <div>
               {/* Patient Info */}
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
-                  <User className="w-8 h-8 text-gray-600" />
-                </div>
                 <div>
-                  <h2 className="text-lg font-semibold mb-2">
-                    56-year-old male, clutching chest, diaphoretic.
+                  <h2 className="text-md font-semibold mb-2">
+                    Initial Information
                   </h2>
                   <ul className="space-y-1 text-sm">
+                    <li>• 56-year-old male, clutching chest, diaphoretic.</li>
                     <li>• Pale, sweaty, visibly distressed.</li>
                     <li>• Rapid, shallow breathing (RR 24).</li>
                     <li>• Grimacing, holding left arm occasionally.</li>
@@ -350,6 +367,23 @@ export default function Home() {
                 </div>
               </div>
             </div>
+            {/* <div className="flex-1 flex flex-col overflow-y-auto">
+              <h2 className="text-md font-semibold mb-2">
+                Requested Resources
+              </h2>
+              <div className="flex flex-col">
+                // {requestedResources.map((resource, index) => {
+                return <Dialog>
+
+                  <DialogHeader>
+                    <DialogTitle>
+
+                    </DialogTitle>
+                  </DialogHeader>
+                </Dialog>
+                })}
+              </div>
+            </div> */}
             <div className="flex flex-col gap-4 justify-end flex-1">
               {/* Physical Exam */}
               <Dialog>
@@ -371,6 +405,7 @@ export default function Home() {
                         <button
                           key={index}
                           className="rounded-md bg-gray-100 hover:bg-gray-200 p-2 text-start"
+                          onClick={() => setSelectedResource(action_string)}
                         >
                           {action_string}
                         </button>
@@ -378,6 +413,32 @@ export default function Home() {
                     })}
                   </div>
                 </DialogContent>
+                {/* {selectedResource !== null && (
+                  <DialogFooter className="flex gap-2">
+                    <button
+                      className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg"
+                      onClick={async () => {
+                        setRequestedResources((prev) => [
+                          ...prev,
+                          {
+                            resource_name: selectedResource,
+                            resource_image:
+                              randomImageLinks[
+                                Math.random() * randomImageLinks.length
+                              ],
+                          },
+                        ]);
+                      }}
+                    >
+                      Confirm
+                    </button>
+                    <DialogClose asChild>
+                      <button className="flex-1 bg-gray-800 text-white py-2 px-4 rounded-lg">
+                        Cancel
+                      </button>
+                    </DialogClose>
+                  </DialogFooter>
+                )} */}
               </Dialog>
 
               {/* Imagery */}
