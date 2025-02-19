@@ -1,13 +1,14 @@
-import { Bell, Settings } from "lucide-react";
+import React from 'react';
+import { Bell, Settings } from 'lucide-react';
 
-export default function TestTopBar() {
+const SelectionTopBar = () => {
   return (
-    <div className="w-full test-top-bar shadow-sm">
+    <div className="w-full selection-top-bar shadow-sm">
       <div className="max-w-6xl mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-8">
             <h1 className="text-xl font-bold lucas-logo">LUCAS</h1>
-            <span className="text-lg font-medium text-white">TESTING IN PROGRESS</span>
+            <span className="text-lg font-medium text-white">STATISTICS</span>
           </div>
           <div className="flex items-center gap-4">
             <button className="p-2 icon hover:bg-gray-100 rounded-full">
@@ -27,4 +28,6 @@ export default function TestTopBar() {
       </div>
     </div>
   );
-}
+};
+
+export default SelectionTopBar;

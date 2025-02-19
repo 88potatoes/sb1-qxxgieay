@@ -15,6 +15,55 @@ body {
   flex-direction: column;
 }
 
+.test-top-bar {
+  background-color: #44054f; /* Set background color to #44054f */
+  color: white;
+}
+
+.test-top-bar .icon,
+.test-top-bar .text {
+  color: white;
+}
+
+.chart-container {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.selection-page-container {
+  display: flex;
+  padding: 16px;
+}
+
+.selection-page-container > div {
+  margin: 8px;
+}
+
+.selection-top-bar {
+  background-color: #44054f; /* Set background color to #44054f */
+  color: white;
+}
+
+.selection-top-bar .icon,
+.selection-top-bar .text {
+  color: white;
+}
+
+.selection-top-bar .lucas-logo {
+  color: white; /* Ensure the LUCAS logo text is white */
+  cursor: pointer; /* Change cursor to pointer for button */
+}
+
+
+
+.test-top-bar .lucas-logo {
+  color: white; /* Ensure the LUCAS logo text is white */
+  cursor: pointer; /* Change cursor to pointer for button */
+}
+
 .top-bar {
   background-color: rgba(34, 11, 78, 0.5); /* Match button background color */
   color: white;
@@ -68,6 +117,9 @@ body {
   gap: 10px; /* Adjust the gap between buttons */
 }
 
+
+
+
 a {
   font-family: 'Lexend Deca', sans-serif;
   background-color: rgba(63, 52, 52, 0.5); /* Set background color with opacity */
@@ -77,8 +129,9 @@ a {
   border-radius: 8px;
   text-align: center;
   width: 200px; /* Set a fixed width for all buttons */
-  text-decoration: none;
+  text-decorastion: none;
 }
+
 
 @keyframes gradient {
   0% {

@@ -351,16 +351,26 @@ export default function Home() {
             <div>
               {/* Patient Info */}
               <div className="flex items-start gap-4">
-                <div>
+                <div className="p-4 border rounded-lg shadow-md bg-white">
                   <h2 className="text-md font-semibold mb-2">
                     Initial Information
                   </h2>
-                  <ul className="space-y-1 text-sm">
-                    <li>• 56-year-old male, clutching chest, diaphoretic.</li>
-                    <li>• Pale, sweaty, visibly distressed.</li>
-                    <li>• Rapid, shallow breathing (RR 24).</li>
-                    <li>• Grimacing, holding left arm occasionally.</li>
-                    <li>• Restless, shifting uncomfortably.</li>
+                  <ul className="space-y-1 text-sm list-disc list-inside">
+                    <li className="leading-relaxed">
+                      56-year-old male, clutching chest, diaphoretic.
+                    </li>
+                    <li className="leading-relaxed">
+                      Pale, sweaty, visibly distressed.
+                    </li>
+                    <li className="leading-relaxed">
+                      Rapid, shallow breathing (RR 24).
+                    </li>
+                    <li className="leading-relaxed">
+                      Grimacing, holding left arm occasionally.
+                    </li>
+                    <li className="leading-relaxed">
+                      Restless, shifting uncomfortably.
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -382,7 +392,7 @@ export default function Home() {
                 })}
               </div>
             </div> */}
-            <div className="flex flex-col gap-4 justify-end flex-1">
+            <div className="flex flex-col gap-1 justify-end flex-1">
               {/* Physical Exam */}
               <Dialog>
                 <DialogTrigger>
