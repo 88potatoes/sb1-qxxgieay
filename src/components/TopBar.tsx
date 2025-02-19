@@ -6,7 +6,10 @@ export default function TopBar() {
       <div className="max-w-6xl mx-auto px-4 py-2">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-8">
-            <h1 className="text-xl font-bold lucas-logo">LUCAS</h1>
+            <h1 className="text-xl font-bold lucas-logo">
+              {/* <a href="/">LUCAS</a> */}
+              LUCAS
+            </h1>
             <div className="flex items-center gap-2 search-input px-3 py-1 rounded-lg">
               <Search className="w-4 h-4 icon" />
               <input

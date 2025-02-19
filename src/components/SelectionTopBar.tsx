@@ -1,5 +1,5 @@
-import React from 'react';
-import { Bell, Settings } from 'lucide-react';
+import React from "react";
+import { Bell, Settings } from "lucide-react";
 
 const SelectionTopBar = () => {
   return (
@@ -7,7 +7,10 @@ const SelectionTopBar = () => {
       <div className="max-w-6xl mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-8">
-            <h1 className="text-xl font-bold lucas-logo">LUCAS</h1>
+            <h1 className="text-xl font-bold lucas-logo">
+              <a href="/" className="bg-transparent px-0">LUCAS</a>
+              {/* LUCAS */}
+            </h1>
             <span className="text-lg font-medium text-white">STATISTICS</span>
           </div>
           <div className="flex items-center gap-4">
@@ -21,7 +24,9 @@ const SelectionTopBar = () => {
               <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
                 <span className="text-sm font-medium text-blue-600">DR</span>
               </div>
-              <span className="text-sm font-medium text-white">Dr. Roberts</span>
+              <span className="text-sm font-medium text-white">
+                Dr. Roberts
+              </span>
             </div>
           </div>
         </div>

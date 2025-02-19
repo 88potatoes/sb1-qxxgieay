@@ -9,11 +9,10 @@ import {
   DialogClose,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { User } from "lucide-react";
 import ModelViewer from "@/components/ModelViewer";
 import { useRef, useState } from "react";
 
-const physicalExamActions = [
+const bedsideActions = [
   "Capillary Blood Glucose (BGL)",
   "Arterial Blood Gas (ABG)",
   "Venous Blood Gas (VBG)",
@@ -33,7 +32,7 @@ const physicalExamActions = [
   "Ankle-Brachial Index (ABI) - Peripheral Artery Disease",
 ] as const;
 
-type physicalExamActionsType = (typeof physicalExamActions)[number];
+type bedsideActionsType = (typeof bedsideActions)[number];
 
 const referralLocations = [
   "General Medicine",
@@ -84,7 +83,7 @@ export default function Home() {
   const [selectedReferralLocation, setSelectedReferralLocation] =
     useState<null | referralLocationsType>(null);
   const [selectedResource, setSelectedResource] =
-    useState<null | physicalExamActionsType>(null);
+    useState<null | bedsideActionsType>(null);
 
   const [isTestCompleted, setIsTestCompleted] = useState(false);
 
@@ -94,6 +93,9 @@ export default function Home() {
   const [requestedResources, setRequestedResources] = useState<
     RequestedResource[]
   >([]);
+
+  const [isShowingECG12Lead, setIsShowingECG12Lead] = useState(false);
+
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Top Navigation Bar */}
@@ -407,46 +409,64 @@ export default function Home() {
                       Find the action you would like to take
                     </DialogDescription>
                   </DialogHeader>
+                </DialogContent>
+              </Dialog>
+
+              {/* Bedside */}
+              <Dialog>
+                <DialogTrigger>
+                  <button
+                    className="w-full bg-gray-800 text-white py-3 px-4 rounded-lg text-left"
+                    onClick={() => setSelectedResource(null)}
+                  >
+                    Bedside
+                  </button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle className="text-">Bedside</DialogTitle>
+                    <DialogDescription>
+                      Find the action you would like to take
+                    </DialogDescription>
+                  </DialogHeader>
                   <div className="flex flex-col gap-2 max-h-96 overflow-y-auto">
-                    {physicalExamActions.map((action_string, index) => {
+                    {bedsideActions.map((action_string, index) => {
                       return (
                         <button
                           key={index}
-                          className="rounded-md bg-gray-100 hover:bg-gray-200 p-2 text-start"
-                          onClick={() => setSelectedResource(action_string)}
+                          className={`rounded-md ${
+                            selectedResource !== action_string
+                              ? "bg-gray-100 hover:bg-gray-200"
+                              : "bg-gray-300 hover:bg-gray-400"
+                          } p-2 text-start`}
+                          onClick={() => {
+                            setSelectedResource(action_string);
+                            console.log(action_string);
+                          }}
                         >
                           {action_string}
                         </button>
                       );
                     })}
                   </div>
+                  {selectedResource !== null && (
+                    <DialogFooter className="flex gap-2">
+                      <DialogClose asChild>
+                        <button
+                          className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg"
+                          onClick={() => setIsShowingECG12Lead(true)}
+                        >
+                          Confirm
+                        </button>
+                      </DialogClose>
+                      <DialogClose asChild>
+                        <button className="flex-1 bg-gray-800 text-white py-2 px-4 rounded-lg">
+                          Cancel
+                        </button>
+                      </DialogClose>
+                    </DialogFooter>
+                  )}
                 </DialogContent>
-                {/* {selectedResource !== null && (
-                  <DialogFooter className="flex gap-2">
-                    <button
-                      className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg"
-                      onClick={async () => {
-                        setRequestedResources((prev) => [
-                          ...prev,
-                          {
-                            resource_name: selectedResource,
-                            resource_image:
-                              randomImageLinks[
-                                Math.random() * randomImageLinks.length
-                              ],
-                          },
-                        ]);
-                      }}
-                    >
-                      Confirm
-                    </button>
-                    <DialogClose asChild>
-                      <button className="flex-1 bg-gray-800 text-white py-2 px-4 rounded-lg">
-                        Cancel
-                      </button>
-                    </DialogClose>
-                  </DialogFooter>
-                )} */}
               </Dialog>
 
               {/* Imagery */}
@@ -464,45 +484,7 @@ export default function Home() {
                     </DialogDescription>
                   </DialogHeader>
                   <div className="flex flex-col gap-2 max-h-96 overflow-y-auto">
-                    {physicalExamActions.map((action_string, index) => {
-                      return (
-                        <button
-                          key={index}
-                          className={`rounded-md bg-gray-100 hover:bg-gray-200 p-2 text-start`}
-                        >
-                          {action_string}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </DialogContent>
-              </Dialog>
-
-              {/* Bedside */}
-              <Dialog>
-                <DialogTrigger>
-                  <button className="w-full bg-gray-800 text-white py-3 px-4 rounded-lg text-left">
-                    Bedside
-                  </button>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle className="text-">Bedside</DialogTitle>
-                    <DialogDescription>
-                      Find the action you would like to take
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="flex flex-col gap-2 max-h-96 overflow-y-auto">
-                    {physicalExamActions.map((action_string, index) => {
-                      return (
-                        <button
-                          key={index}
-                          className="rounded-md bg-gray-100 hover:bg-gray-200 p-2 text-start"
-                        >
-                          {action_string}
-                        </button>
-                      );
-                    })}
+                    {/* Empty  */}
                   </div>
                 </DialogContent>
               </Dialog>
@@ -522,16 +504,7 @@ export default function Home() {
                     </DialogDescription>
                   </DialogHeader>
                   <div className="flex flex-col gap-2 max-h-96 overflow-y-auto">
-                    {physicalExamActions.map((action_string, index) => {
-                      return (
-                        <button
-                          key={index}
-                          className="rounded-md bg-gray-100 hover:bg-gray-200 p-2 text-start"
-                        >
-                          {action_string}
-                        </button>
-                      );
-                    })}
+                    {/* Empty */}
                   </div>
                 </DialogContent>
               </Dialog>
@@ -539,6 +512,21 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* ECG 12 Lead Dialog */}
+      <Dialog open={isShowingECG12Lead} onOpenChange={setIsShowingECG12Lead}>
+        <DialogContent className="max-w-[80vw] w-full">
+          <DialogHeader>
+            <DialogTitle>
+              Results for <span className="font-bold">ECG 12 Lead</span>
+            </DialogTitle>
+            <DialogDescription>Review the results</DialogDescription>
+          </DialogHeader>
+          <div className="flex flex-col justify-center items-center">
+            <img src="https://ecglibrary.com/ecgs/norm.png" />
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Test Completion Dialog */}
       <Dialog open={isTestCompleted}>
