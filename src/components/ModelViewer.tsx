@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react';
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+// export default ModelViewer;
+import React, { useEffect, useRef } from "react";
+import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 const ModelViewer = () => {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -12,40 +13,71 @@ const ModelViewer = () => {
 
     // Scene setup
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, mount.clientWidth / mount.clientHeight, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      mount.clientWidth / mount.clientHeight,
+      0.1,
+      1000
+    );
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(mount.clientWidth, mount.clientHeight);
-    renderer.setClearColor(0xffffff); // Set background color to white
+    // renderer.setClearColor(0xffffff);
+    // renderer.setClearColor(0xf5f5f5); //
+    // renderer.setClearColor(0xf5f7f8); // Very light blue-gray Very light gray
+    renderer.setClearColor(0xf0f4f7); // Light cool gray
+    // Increase exposure and enable tone mapping
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.5; // Increase exposure
+    renderer.outputEncoding = THREE.sRGBEncoding; // Better color representation
+
     mount.appendChild(renderer.domElement);
 
     // Load the GLTF model
     const loader = new GLTFLoader();
-    loader.load('/white_mesh.glb', (gltf) => {
-      scene.add(gltf.scene);
-    }, undefined, (error) => {
-      console.error('An error occurred while loading the model:', error);
-    });
+    loader.load(
+      "/white_mesh.glb",
+      (gltf) => {
+        // Make materials more reflective
+        gltf.scene.traverse((child) => {
+          if (child instanceof THREE.Mesh) {
+            child.material.metalness = 0.3; // Increase reflectivity
+            child.material.roughness = 0.2; // Make surface smoother
+          }
+        });
+        scene.add(gltf.scene);
+      },
+      undefined,
+      (error) => {
+        console.error("An error occurred while loading the model:", error);
+      }
+    );
 
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5); // Increase intensity
+    // Enhanced Lighting Setup
+    const ambientLight = new THREE.AmbientLight(0xffffff, 2.0); // Increased intensity
     scene.add(ambientLight);
 
-    const directionalLight1 = new THREE.DirectionalLight(0xffffff, 1.5); // Increase intensity
-    directionalLight1.position.set(0, 200, 100);
-    scene.add(directionalLight1);
+    // Main front light
+    const frontLight = new THREE.DirectionalLight(0xffffff, 3.0);
+    frontLight.position.set(0, 0, 10);
+    scene.add(frontLight);
 
-    const directionalLight2 = new THREE.DirectionalLight(0xffffff, 1.5); // Add another directional light
-    directionalLight2.position.set(0, -200, -100);
-    scene.add(directionalLight2);
+    // Top light
+    const topLight = new THREE.DirectionalLight(0xffffff, 2.0);
+    topLight.position.set(0, 10, 0);
+    scene.add(topLight);
 
-    const pointLight = new THREE.PointLight(0xffffff, 1.5); // Add a point light
-    pointLight.position.set(50, 50, 50);
-    scene.add(pointLight);
+    // Fill lights for sides
+    const leftLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    leftLight.position.set(-10, 0, 0);
+    scene.add(leftLight);
 
-    const spotLight = new THREE.SpotLight(0xffffff, 1.5); // Add a spot light
-    spotLight.position.set(-50, -50, 50);
-    spotLight.castShadow = true;
-    scene.add(spotLight);
+    const rightLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    rightLight.position.set(10, 0, 0);
+    scene.add(rightLight);
+
+    // Add hemisphere light for better ambient lighting
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 1.0);
+    scene.add(hemiLight);
 
     // Orbit controls
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -53,6 +85,7 @@ const ModelViewer = () => {
     controls.dampingFactor = 0.25;
     controls.screenSpacePanning = false;
     controls.maxPolarAngle = Math.PI / 2;
+    controls.target.set(0, 0.6, 0);
 
     // Animation loop
     const animate = () => {
@@ -61,7 +94,8 @@ const ModelViewer = () => {
       renderer.render(scene, camera);
     };
 
-    camera.position.z = 5;
+    camera.position.set(0, 2, 3);
+    camera.lookAt(0, 1, 0);
     animate();
 
     // Handle window resize
@@ -71,15 +105,15 @@ const ModelViewer = () => {
       renderer.setSize(mount.clientWidth, mount.clientHeight);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
       mount.removeChild(renderer.domElement);
     };
   }, []);
 
-  return <div ref={mountRef} style={{ width: '100%', height: '100%' }} />;
+  return <div ref={mountRef} style={{ width: "100%", height: "100%" }} />;
 };
 
 export default ModelViewer;
