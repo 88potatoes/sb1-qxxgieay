@@ -102,7 +102,7 @@ export default function Home() {
       <TestTopBar />
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-4 py-6 h-[calc(100vh-52px)]">
+      <div className="max-w-6xl mx-auto px-4 py-6 h-[calc(100vh-60px)]">
         {/* Three Column Layout */}
         <div className="flex gap-6 h-full">
           {/* Left Column - 1/4 width */}
