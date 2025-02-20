@@ -1,23 +1,23 @@
-import { Search, Bell, Settings } from "lucide-react";
+import { Bell, Settings } from "lucide-react";
 
-export default function TopBar() {
+export default function Bar() {
   return (
     <div className="w-full top-bar shadow-sm">
       <div className="max-w-6xl mx-auto px-4 py-2">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-8">
-            <h1 className="text-xl font-bold lucas-logo">
+            <h1 className="text-xl font-bold lucas-log">
               {/* <a href="/">LUCAS</a> */}
               LUCAS
             </h1>
-            <div className="flex items-center gap-2 search-input px-3 py-1 rounded-lg">
+            {/* <div className="flex items-center gap-2 search-input px-3 py-1 rounded-lg">
               <Search className="w-4 h-4 icon" />
               <input
                 type="text"
                 placeholder="Search patients..."
                 className="bg-transparent outline-none text-sm w-48 search-input"
               />
-            </div>
+            </div> */}
           </div>
           <div className="flex items-center gap-4">
             <button className="p-2 icon hover:bg-gray-100 rounded-full">

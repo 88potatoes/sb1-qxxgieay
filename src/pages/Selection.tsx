@@ -1,4 +1,3 @@
-import React from 'react';
 import SelectionTopBar from '../components/SelectionTopBar';
 import PentagramChart from '../components/PentagramChart';
 import CircleProgressBar from '../components/CircleProgressBar';

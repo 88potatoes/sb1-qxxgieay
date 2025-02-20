@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Test from "./pages/Test";
 import Results from "./pages/Results";
 import Selection from "./pages/Selection";
+import Intro from "./pages/Intro";
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
         <Route path="/test" element={<Test />} />
         <Route path="/results" element={<Results />} />
         <Route path="/selection" element={<Selection />} />
+        <Route path="/intro" element={<Intro />} />
       </Routes>
     </BrowserRouter>
   );

@@ -22,13 +22,19 @@ export default function Home() {
           href="/results"
           className="bg-gray-800 text-white py-3 px-4 rounded-lg text-center"
         >
-          Results
+          Selection
         </a>
         <a
           href="/selection"
           className="bg-gray-800 text-white py-3 px-4 rounded-lg text-center"
         >
-          Selection
+          Results
+        </a>
+        <a
+          href="/intro"
+          className="bg-gray-800 text-white py-3 px-4 rounded-lg text-center"
+        >
+          Intro
         </a>
       </div>
     </div>

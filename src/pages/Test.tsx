@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import ModelViewer from "@/components/ModelViewer";
 import { useRef, useState } from "react";
+import { AudioLines } from "lucide-react";
 
 const bedsideActions = [
   "Capillary Blood Glucose (BGL)",
@@ -109,7 +110,7 @@ export default function Home() {
           <div className="w-1/4 space-y-4 flex flex-col">
             <div className="w-full">
               {/* Vitals Monitor */}
-              <div className="w-full bg-black text-green-400 p-3 rounded-lg">
+              <div className="w-full bg-black text-green-400 p-3 rounded-lg shadow-md">
                 {/* BPM */}
                 <div className="border-b border-green-400 pb-2 mb-2 flex gap-2">
                   <div className="h-8 bg-green-400/20 rounded mb-1 basis-2/3"></div>
@@ -152,11 +153,11 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col w-full flex-1 gap-4 justify-end">
+            <div className="flex flex-col w-full flex-1 gap-2 justify-end">
               {/* Meds */}
               <Dialog>
                 <DialogTrigger>
-                  <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
+                  <button className="shadow-sm w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
                     Meds
                   </button>
                 </DialogTrigger>
@@ -171,7 +172,7 @@ export default function Home() {
               {/* IV */}
               <Dialog>
                 <DialogTrigger>
-                  <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
+                  <button className="shadow-sm w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
                     IV
                   </button>
                 </DialogTrigger>
@@ -187,7 +188,7 @@ export default function Home() {
               {/* MET */}
               <Dialog>
                 <DialogTrigger>
-                  <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
+                  <button className="shadow-sm w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
                     MET
                   </button>
                 </DialogTrigger>
@@ -203,7 +204,7 @@ export default function Home() {
               {/* O₂ */}
               <Dialog>
                 <DialogTrigger>
-                  <button className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
+                  <button className="shadow-sm w-full bg-blue-600 text-white py-3 px-4 rounded-lg text-left">
                     O₂
                   </button>
                 </DialogTrigger>
@@ -220,7 +221,7 @@ export default function Home() {
                 {/* Discharge */}
                 <Dialog>
                   <DialogTrigger asChild>
-                    <button className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg">
+                    <button className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg shadow-sm">
                       Discharge
                     </button>
                   </DialogTrigger>
@@ -251,7 +252,7 @@ export default function Home() {
                 <Dialog>
                   <DialogTrigger asChild>
                     <button
-                      className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg"
+                      className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg shadow-sm"
                       onClick={() => setSelectedReferralLocation(null)}
                     >
                       Refer
@@ -327,14 +328,17 @@ export default function Home() {
                     );
                   }}
                 >
-                  <input
-                    type="text"
-                    className="bg-gray-200 rounded-3xl p-4 w-full"
-                    placeholder="Talk to patient"
-                  />
+                  <div className="relative p-2 bg-gray-200 rounded-3xl shadow-sm">
+                    <input
+                      type="text"
+                      className="rounded-3xl p-2 w-full pr-12 bg-inherit"
+                      placeholder="Talk to patient"
+                    />
+                    <AudioLines className="absolute right-4 top-1/2 transform -translate-y-1/2 p-1 rounded-3xl hover:bg-gray-300 hover:cursor-pointer" width={32} height={32} />
+                  </div>
                 </form>
               </div>
-              <div className="bg-gray-200 rounded-3xl p-4 flex-1">
+              <div className="bg-gray-200 rounded-3xl p-4 flex-1 shadow-sm">
                 <div>{patientResponse === 0 && "Hi Doctor"}</div>
                 <div>
                   {patientResponse === 1 && (
@@ -394,11 +398,11 @@ export default function Home() {
                 })}
               </div>
             </div> */}
-            <div className="flex flex-col gap-1 justify-end flex-1">
+            <div className="flex flex-col gap-2 justify-end flex-1">
               {/* Physical Exam */}
               <Dialog>
-                <DialogTrigger>
-                  <button className="w-full bg-gray-800 text-white py-3 px-4 rounded-lg text-left">
+                <DialogTrigger asChild>
+                  <button className="shadow-sm w-full bg-gray-800 text-white py-3 px-4 rounded-lg text-left">
                     Physical Exam
                   </button>
                 </DialogTrigger>
@@ -416,7 +420,7 @@ export default function Home() {
               <Dialog>
                 <DialogTrigger>
                   <button
-                    className="w-full bg-gray-800 text-white py-3 px-4 rounded-lg text-left"
+                    className="shadow-sm w-full bg-gray-800 text-white py-3 px-4 rounded-lg text-left "
                     onClick={() => setSelectedResource(null)}
                   >
                     Bedside
@@ -472,7 +476,7 @@ export default function Home() {
               {/* Imagery */}
               <Dialog>
                 <DialogTrigger>
-                  <button className="w-full bg-gray-800 text-white py-3 px-4 rounded-lg text-left">
+                  <button className="shadow-sm w-full bg-gray-800 text-white py-3 px-4 rounded-lg text-left ">
                     Imagery
                   </button>
                 </DialogTrigger>
@@ -492,7 +496,7 @@ export default function Home() {
               {/* Labs */}
               <Dialog>
                 <DialogTrigger>
-                  <button className="w-full bg-gray-800 text-white py-3 px-4 rounded-lg text-left">
+                  <button className="shadow-sm w-full bg-gray-800 text-white py-3 px-4 rounded-lg text-left ">
                     Labs
                   </button>
                 </DialogTrigger>

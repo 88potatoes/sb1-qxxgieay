@@ -12,7 +12,7 @@ const SelectionTopBar = () => {
               </a>
               {/* LUCAS */}
             </h1>
-            <span className="text-lg font-medium text-white">RESULTS</span>
+            <span className="text-lg font-medium text-white">SELECTION</span>
           </div>
           <div className="flex items-center gap-4">
             <button className="p-2 icon hover:bg-gray-100 rounded-full">

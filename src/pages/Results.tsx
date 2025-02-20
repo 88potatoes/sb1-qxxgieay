@@ -1,9 +1,5 @@
 import ResultsTopBar from "../components/ResultsTopBar";
-import PentagramChart from "../components/PentagramChart";
-import CircleProgressBar from "../components/CircleProgressBar";
-import React from "react";
 import {
-  User,
   Droplets,
   HeartPulse,
   Baby,

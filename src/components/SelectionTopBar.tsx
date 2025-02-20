@@ -1,4 +1,3 @@
-import React from "react";
 import { Bell, Settings } from "lucide-react";
 
 const SelectionTopBar = () => {
