@@ -44,7 +44,7 @@ export default function Selection() {
                 <h1 className="text-center text-2xl font-medium">Focus Mode</h1>
               </button>
               <button className="bg-blue-500 hover:bg-blue-600 text-white py-4 rounded-full w-full">
-                <a href="/test" className="bg-transparent px-0">
+                <a href="/results" className="bg-transparent px-0">
                   <h1 className="text-center text-2xl font-medium">
                     Enter Simulation
                   </h1>

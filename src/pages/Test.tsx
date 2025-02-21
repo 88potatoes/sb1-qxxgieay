@@ -610,10 +610,10 @@ export default function Home() {
           </div>
           <DialogFooter>
             <a
-              href="/"
-              className="bg-gray-800 text-white py-3 px-4 rounded-lg text-left"
+              href="/selection"
+              className="bg-gray-800 text-white py-3 rounded-lg text-center"
             >
-              Return to Dashboard
+              See summary
             </a>
           </DialogFooter>
         </DialogContent>
