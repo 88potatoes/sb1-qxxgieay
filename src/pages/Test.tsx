@@ -10,7 +10,7 @@ import {
 	DialogFooter,
 } from "@/components/ui/dialog";
 import ModelViewer from "@/components/ModelViewer";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { AudioLines } from "lucide-react";
 
 const bedsideActions = [
@@ -55,7 +55,7 @@ const referralLocations = [
 type referralLocationsType = (typeof referralLocations)[number];
 
 const patientReponses = [
-	"I'm having pain in my chest."
+	"I'm have pain in my chest and it's running down my left arm."
 ];
 
 const medicines = [
@@ -106,13 +106,32 @@ export default function Home() {
 	const [requestedResources, setRequestedResources] = useState<
 		RequestedResource[]
 	>([]);
-
+	const [doctorInput, setDoctorInput] = useState<0 | 1 | 2 | 3>(0);
 	const [isShowingMedicineSuccess, setIsShowingMedicineSuccess] = useState(false);
 
 	const [isShowingMedicineSelection, setIsShowingMedicineSelection] = useState(false);
 
 	const [isShowingECG12Lead, setIsShowingECG12Lead] = useState(false);
+	const [isShowingReferralNote, setIsShowingReferralNote] = useState(false);
+	const [isListening, setIsListening] = useState(false);
 
+	useEffect(() => {
+		let timeoutId;
+
+		if (doctorInput === 3) {
+			timeoutId = setTimeout(() => {
+				setDoctorInput(2);
+			}, 2000);
+		}
+
+		// Cleanup function to clear timeout if component unmounts
+		// or if isListening changes before timeout completes
+		return () => {
+			if (timeoutId) {
+				clearTimeout(timeoutId);
+			}
+		};
+	}, [doctorInput]);
 	return (
 		<div className="min-h-screen bg-gray-100">
 			{/* Top Navigation Bar */}
@@ -336,12 +355,14 @@ export default function Home() {
 										</div>
 										{selectedReferralLocation !== null && (
 											<DialogFooter className="flex gap-2">
-												<button
-													className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg"
-													onClick={() => setIsTestCompleted(true)}
-												>
-													Confirm
-												</button>
+												<DialogClose asChild>
+													<button
+														className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg"
+														onClick={() => { setIsShowingReferralNote(true); setDoctorInput(0); }}
+													>
+														Confirm
+													</button>
+												</DialogClose>
 												<DialogClose asChild>
 													<button className="flex-1 bg-gray-800 text-white py-2 px-4 rounded-lg">
 														Cancel
@@ -409,7 +430,7 @@ export default function Home() {
 							<div className="flex items-start gap-4">
 								<div className="p-4 border rounded-lg shadow-md bg-white">
 									<h2 className="text-md font-semibold mb-2">
-										Initial Information
+										Visual Cues
 									</h2>
 									<ul className="space-y-1 text-sm list-disc list-inside">
 										<li className="leading-relaxed">
@@ -576,7 +597,7 @@ export default function Home() {
 						<DialogDescription>Review the results</DialogDescription>
 					</DialogHeader>
 					<div className="flex flex-col justify-center items-center">
-						<img src="https://ecglibrary.com/ecgs/norm.png" className="max-w-[80rem] w-full" />
+						<img src="https://www.saem.org/images/default-source/academy-images/cdem/picture1236f4cc18-5b6a-4608-8b50-47e2af5e16f4.png?sfvrsn=eea9ca83_1" className="max-w-[80rem] w-full" />
 					</div>
 				</DialogContent>
 			</Dialog>
@@ -681,9 +702,59 @@ export default function Home() {
 			</Dialog>
 
 
-			<Dialog>
-				<DialogContent></DialogContent>
+			{/* Referral Note */}
+			<Dialog open={isShowingReferralNote} onOpenChange={setIsShowingReferralNote}>
+				<DialogContent className="max-w-[40vw] w-full">
+					<DialogHeader>
+						<DialogTitle>
+							Referral Note
+						</DialogTitle>
+						<DialogDescription>Leave a note for the doctor
+						</DialogDescription>
+					</DialogHeader>
+					<button onClick={() => {
+						setDoctorInput(prev => {
+							if (prev === 0) {
+								return 1;
+							}
+							if (prev === 1) { return 3 }
+						})
+						setIsListening((prev) => !prev);
+					}}>
+						<AudioLines className={`p-1 rounded-3xl ${isListening ? 'bg-gray-200': ''} hover:bg-gray-300 hover:cursor-pointer`} width={32} height={32} />
+					</button>
+					<div className="bg-gray-200 rounded-3xl p-4 flex-1 shadow-sm">
+						<div>{doctorInput === 0 && "Please record input"}</div>
+						<div>
+							{doctorInput === 1 && (
+								<p className="text-gray-600">Reading input...</p>
+							)}
+						</div>
+						<div>
+							{doctorInput === 2 && "My name is Dr Robert’s and I have a 55 year old with an abnormal ECG."}
+							{doctorInput === 3 && <p className="text-gray-600">Processing input...</p>}
+						</div>
+					</div>
+					{doctorInput === 2 && (
+						<DialogFooter className="flex gap-2">
+							<DialogClose asChild>
+								<button
+									className="flex-1 bg-red-400 text-white py-2 px-4 rounded-lg"
+									onClick={() => setIsTestCompleted(true)}
+								>
+									Confirm
+								</button>
+							</DialogClose>
+							<DialogClose asChild>
+								<button className="flex-1 bg-gray-800 text-white py-2 px-4 rounded-lg">
+									Cancel
+								</button>
+							</DialogClose>
+						</DialogFooter>
+					)}
+
+				</DialogContent>
 			</Dialog>
-		</div>
+		</div >
 	);
 }
